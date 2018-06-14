@@ -1,8 +1,7 @@
-/* global window */
-
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ProgressBar } from 'react-md-progress-bar';
+import ReactModal from 'react-modal';
 import styled from 'styled-components';
 
 class Dialog extends Component {
@@ -15,7 +14,6 @@ class Dialog extends Component {
     this.state = {
       show: props.show,
       progressBar: props.progressBar,
-      errors: props.errors,
     };
   }
 
@@ -27,7 +25,6 @@ class Dialog extends Component {
     this.setState({
       show: nextProps.show,
       progressBar: nextProps.progressBar,
-      errors: nextProps.errors,
     });
   }
 
@@ -45,31 +42,17 @@ class Dialog extends Component {
    */
   renderModal() {
     return (
-      <Container style={{ ...{ height: window.innerHeight } }}>
+      <ReactModal isOpen={this.props.show} ariaHideApp={false}>
         <Wrapper>
           { this.renderProgress() }
           { this.props.children }
         </Wrapper>
-      </Container>
+      </ReactModal>
     );
   }
 
   /**
-   * Render error message.
-   * @returns {XML}
-   */
-  renderErrors() {
-    let errors;
-    if (this.state.errors) {
-      errors = this.state.errors.map((error, index) =>
-        <ErrorItem key={index.toString()}>{error.message}</ErrorItem>,
-      );
-    }
-    return (this.state.errors) ? <Errors>{errors}</Errors> : null;
-  }
-
-  /**
-   * Render error message.
+   * Render modal message.
    * @returns {XML}
    */
   render() {
@@ -77,15 +60,10 @@ class Dialog extends Component {
   }
 }
 
-Dialog.defaultProps = {
-  errors: [],
-};
-
 Dialog.propTypes = {
   children: PropTypes.arrayOf(PropTypes.element).isRequired,
   show: PropTypes.bool.isRequired,
   progressBar: PropTypes.bool.isRequired,
-  errors: PropTypes.array,
 };
 
 export default Dialog;
@@ -93,17 +71,6 @@ export default Dialog;
 /**
  * Styles
  */
-export const Container = styled.div`
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
-  display: flex;;
-  justify-content: center;
-  align-items: center;
-`;
-
 export const Header = styled.div`
   padding: 15px;
   border-bottom: 1px solid #e5e5e5;
@@ -114,6 +81,7 @@ export const Title = styled.h1`
   font-size: 16px;
   margin: 0;
   padding: 0;
+  font-weight: bold;
 `;
 
 export const Body = styled.div`
