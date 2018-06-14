@@ -4,6 +4,22 @@ import { ProgressBar } from 'react-md-progress-bar';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
 
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    border: 'none',
+    padding: '0',
+  },
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+  },
+};
+
 class Dialog extends Component {
   /**
    * React Component constructor.
@@ -42,7 +58,12 @@ class Dialog extends Component {
    */
   renderModal() {
     return (
-      <ReactModal isOpen={this.props.show} ariaHideApp={false}>
+      <ReactModal
+        isOpen={this.props.show}
+        ariaHideApp={false}
+        style={customStyles}
+        shouldCloseOnOverlayClick
+      >
         <Wrapper>
           { this.renderProgress() }
           { this.props.children }

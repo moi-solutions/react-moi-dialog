@@ -41,6 +41,22 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    border: 'none',
+    padding: '0'
+  },
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.7)'
+  }
+};
+
 var Dialog = function (_Component) {
   _inherits(Dialog, _Component);
 
@@ -96,7 +112,12 @@ var Dialog = function (_Component) {
     value: function renderModal() {
       return _react2.default.createElement(
         _reactModal2.default,
-        { isOpen: this.props.show, ariaHideApp: false },
+        {
+          isOpen: this.props.show,
+          ariaHideApp: false,
+          style: customStyles,
+          shouldCloseOnOverlayClick: true
+        },
         _react2.default.createElement(
           Wrapper,
           null,
