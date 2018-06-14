@@ -1,0 +1,43 @@
+{
+  "name": "react-moi-dialog",
+  "version": "0.0.1",
+  "description": "React Component Material Design Dialog.",
+  "main": "index.js",
+  "repository": "https://github.com/moi-solutions/react-moi-dialog.git",
+  "author": "Paulo McNally <paulomcnally@gmail.com>",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "start": "webpack-dev-server",
+    "docs": "NODE_ENV=production webpack -p",
+    "build": "babel src -d dist",
+    "clean": "rm -rf dist",
+    "dist": "yarn run clean && yarn run build"
+  },
+  "dependencies": {
+    "prop-types": "^15.6.0",
+    "react": "^16.4.1",
+    "react-md-progress-bar": "^0.0.1",
+    "styled-components": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.8.2",
+    "html-webpack-plugin": "^2.29.0",
+    "raw-loader": "^0.5.1",
+    "react-dom": "^16.4.1",
+    "webpack": "^3.2.0",
+    "webpack-dev-server": "^2.5.1"
+  }
+}
