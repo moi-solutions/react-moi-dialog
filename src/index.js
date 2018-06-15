@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import { ProgressBar } from 'react-md-progress-bar';
 import ReactModal from 'react-modal';
 import styled from 'styled-components';
@@ -20,65 +20,19 @@ const customStyles = {
   },
 };
 
-class Dialog extends Component {
-  /**
-   * React Component constructor.
-   * @param props
-   */
-  constructor(props) {
-    super(props);
-    this.state = {
-      show: props.show,
-      progressBar: props.progressBar,
-    };
+function Dialog({ children, progressBar, show }) {
+  if (!show) {
+    return null;
   }
 
-  /**
-   * Update state based nextProps.
-   * @param nextProps
-   */
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      show: nextProps.show,
-      progressBar: nextProps.progressBar,
-    });
-  }
-
-  /**
-   * Render progress.
-   * @returns {XML}
-   */
-  renderProgress() {
-    return (this.state.progressBar) ? <ProgressBar show overlay /> : null;
-  }
-
-  /**
-   * Render modal.
-   * @returns {XML}
-   */
-  renderModal() {
-    return (
-      <ReactModal
-        isOpen={this.props.show}
-        ariaHideApp={false}
-        style={customStyles}
-        shouldCloseOnOverlayClick
-      >
-        <Wrapper>
-          { this.renderProgress() }
-          { this.props.children }
-        </Wrapper>
-      </ReactModal>
-    );
-  }
-
-  /**
-   * Render modal message.
-   * @returns {XML}
-   */
-  render() {
-    return (this.state.show) ? this.renderModal() : null;
-  }
+  return (
+    <ReactModal shouldCloseOnOverlayClick ariaHideApp={false} isOpen={show} style={customStyles}>
+      <Wrapper>
+        {progressBar ? <ProgressBar show overlay /> : null}
+        {children}
+      </Wrapper>
+    </ReactModal>
+  );
 }
 
 Dialog.propTypes = {
@@ -118,7 +72,7 @@ export const Footer = styled.div`
   border-top: 1px solid #e5e5e5;
 `;
 
-export const Wrapper = styled.div`
+const Wrapper = styled.div`
   border-radius: 4px;
   width: 600px;
   background-color: white;
